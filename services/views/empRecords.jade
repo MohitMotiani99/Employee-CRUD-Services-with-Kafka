@@ -1,0 +1,79 @@
+html 
+    head 
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+        script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js")
+
+        title Employee Records 
+
+    body 
+        div.container
+            div.jumbotron(style='background-color:black;color:yellow')
+                h1 Employee CRUD Services with Notifications Using Kafka to Subscribers
+            div 
+                h1 Current Employees
+            table.table.table-striped
+                thead.thead-dark 
+                    tr 
+                        th Employee Name 
+                        th Employee Salary 
+                        th Employee Age 
+                    tr 
+                tbody 
+                    each e in JSON.parse(emprec) 
+                        tr 
+                            th=e.empname 
+                            th=e.empsal 
+                            th=e.empage 
+            h1 Services
+            
+            div(id='accordion')
+                div.card
+                    div.card-header(id='addemp')
+                        h5.mb-0 
+                            button.btn.btn-link(data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne') Add Employee
+                    div.collapse.hide(id='collapseOne' aria-labelledby='addemp' data-parent='#accordion')
+                        div.card-body 
+                            form.form-group(method='POST' action='/bookservice/add')
+                                div 
+                                    label(for="empame") Enter Employee Name 
+                                    input.form-control(type="text" name='empname' id='empname')
+                                div 
+                                    label(for="empsal") Enter Employee Salary 
+                                    input.form-control(type="number" name='empsal' id='empsal')
+                                div 
+                                    label(for="empage") Enter Employee Age 
+                                    input.form-control(type="number" name='empage' id='empage')
+                                br
+                                input.btn.btn-primary(type="submit" value='Add')  
+                div.card
+                    div.card-header(id='delemp')
+                        h5.mb-0 
+                            button.btn.btn-link(data-toggle='collapse' data-target='#collapseTwo' aria-expanded='true' aria-controls='collapseTwo') Remove Employee
+                    div.collapse.hide(id='collapseTwo' aria-labelledby='delemp' data-parent='#accordion')
+                        div.card-body 
+                            form.form-group(method='POST' action='/bookservice/del')
+                                div 
+                                    label(for="empame_del") Enter Employee to Remove
+                                    input.form-control(type="text" name='empname' id='empname_del')
+                                br
+                                input.btn.btn-primary(type="submit" value='Remove')  
+                div.card
+                    div.card-header(id='uSalemp')
+                        h5.mb-0 
+                            button.btn.btn-link(data-toggle='collapse' data-target='#collapseThree' aria-expanded='true' aria-controls='collapseThree') Update Employee Salary
+                    div.collapse.hide(id='collapseThree' aria-labelledby='uSalemp' data-parent='#accordion')
+                        div.card-body 
+                            form.form-group(method='POST' action='/bookservice/uSal')
+                                div 
+                                    label(for="empame_uSal") Enter Employee Name 
+                                    input.form-control(type="text" name='empname' id='empname_uSal')
+                                div 
+                                    label(for="empsal_uSal") Enter New Salary
+                                    input.form-control(type="number" name='empsal' id='empsal_uSal')
+                                br
+                                input.btn.btn-primary(type="submit" value='Update')  
+                            
+            
+            
